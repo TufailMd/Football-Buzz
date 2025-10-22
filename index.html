@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Football Buzz</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+      .noView {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <header
+      class="w-full fixed top-0 z-50 text-gray-600 body-font bg-indigo-300"
+    >
+      <div
+        class="container sm:max-w-full md:max-w-full flex items-center justify-between p-2"
+      >
+        <!-- Logo -->
+        <a
+          class="flex title-font font-medium items-center text-gray-900"
+          href="index.html"
+        >
+          <span
+            class="brandName hover:cursor-pointer md:text-lg lg:text-2xl ml-2 text-nowrap"
+            >Football Buzz</span
+          >
+        </a>
+
+        <!-- Search (Desktop) -->
+        <div class="hidden md:flex items-center justify-center w-1/3">
+          <form class="searchForm w-full flex gap-2">
+            <input
+              id="searchInput"
+              type="text"
+              placeholder="Search..."
+              class="md:text-lg w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <button
+              class="md:text-md lg:text-lg bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              Search
+            </button>
+          </form>
+        </div>
+
+        <!-- Nav Links (Desktop only) -->
+        <nav
+          id="nav-menu"
+          class="hidden md:flex md:flex-row md:space-x-6 md:items-center"
+        >
+          <a class="ballonDorBtn py-2 hover:text-gray-900 cursor-pointer"
+            >Ballon d'Or</a
+          >
+          <a class="py-2 hover:text-gray-900 cursor-pointer">Players</a>
+          <a class="py-2 hover:text-gray-900 cursor-pointer">Matches</a>
+          <a class="py-2 hover:text-gray-900 cursor-pointer">Community</a>
+        </nav>
+
+        <!-- Hamburger (Mobile only) -->
+        <button
+          id="menu-button"
+          class="md:hidden text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+        >
+          <!-- Hamburger Icon -->
+          <svg
+            id="icon-hamburger"
+            class="w-8 h-8"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            ></path>
+          </svg>
+          <!-- Close Icon -->
+          <svg
+            id="icon-close"
+            class="w-8 h-8 hidden"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            ></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Nav for Mobile -->
+      <nav
+        id="mobile-nav"
+        class="hidden flex flex-col items-end space-y-2 px-4 pb-4 md:hidden"
+      >
+        <a class="py-2 hover:text-gray-900 cursor-pointer">Discover</a>
+        <a class="py-2 hover:text-gray-900 cursor-pointer">Players</a>
+        <a class="py-2 hover:text-gray-900 cursor-pointer">Matches</a>
+        <a class="py-2 hover:text-gray-900 cursor-pointer">Community</a>
+      </nav>
+    </header>
+
+    <div class="container mx-auto p-4 mt-20">
+      <div class="filterOpt p-4">
+        <div class="flex justify-start gap-4">
+          <select id="filterPosition" class="bg-zinc-200 p-2 border rounded">
+            <option value="All">All Positions</option>
+            <option value="Goalkeeper">Goalkeeper</option>
+            <option value="Defender">Defender</option>
+            <option value="Midfielder">Midfielder</option>
+            <option value="Forward">Forward</option>
+          </select>
+
+          <select
+            id="sortOption"
+            class="bg-zinc-200 text-center p-2 border rounded"
+          >
+            <option value="none">Sort By</option>
+            <option value="ageAsc">Age: Low to High</option>
+            <option value="ageDesc">Age: High to Low</option>
+            <option value="jerseyAsc">Jersey: Low to High</option>
+            <option value="jerseyDesc">Jersey: High to Low</option>
+          </select>
+
+          <button
+            class="text-white bg-indigo-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+            id="filterBtn"
+          >
+            Apply
+          </button>
+        </div>
+      </div>
+      <div class="container mx-auto p-4" id="container"></div>
+    </div>
+
+    <!-- Modal -->
+    <div
+      id="playerModal"
+      class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50"
+    >
+      <div
+        class="bg-white rounded-xl w-[90%] max-w-2xl p-6 relative shadow-lg max-h-[90vh] overflow-y-auto"
+      >
+        <button
+          id="closeModal"
+          class="absolute top-2 right-2 text-xl font-bold text-gray-500 hover:text-black"
+        >
+          &times;
+        </button>
+        <div id="modalContent"></div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-red-600 text-white mt-10">
+      <div class="container mx-auto px-6 py-8">
+        <div
+          class="flex flex-col md:flex-row justify-between items-start gap-6"
+        >
+          <div class="w-full md:w-1/3">
+            <p>
+              Stay on top of the game with Football Buzz — your go-to source for
+              all things football. Discover live scores, match highlights,
+              player stats, team news, and expert analysis. Your ultimate
+              destination for football fans everywhere.
+            </p>
+            <p class="mt-4">
+              Powered by
+              <a href="#" class="text-teal-300 underline hover:text-teal-400"
+                >thesportsdb</a
+              >
+            </p>
+          </div>
+
+          <div class="w-full md:w-2/3 flex justify-evenly">
+            <div>
+              <h4 class="font-bold mb-2">Product</h4>
+              <ul class="space-y-1">
+                <li>Home</li>
+                <li>Popular Player</li>
+                <li>Teams</li>
+                <li>Favorites</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-bold mb-2">Company</h4>
+              <ul class="space-y-1">
+                <li>About</li>
+                <li>Privacy Policy</li>
+                <li>Terms of Service</li>
+                <li>Contact</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-bold mb-2">Resources</h4>
+              <ul class="space-y-1">
+                <li>API Documentation</li>
+                <li>Help Center</li>
+                <li>Status</li>
+                <li>Changelog</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <hr class="my-6 border-white/30" />
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <p>&copy; 2025 Football Buzz. All rights reserved.</p>
+          <div class="flex gap-4 text-xl">
+            <i class="fa-brands fa-github"></i>
+            <i class="fa-brands fa-twitter"></i>
+            <i class="fa-solid fa-envelope"></i>
+          </div>
+        </div>
+        <div class="text-center mt-4">
+          Made with ❤️ for Football lovers everywhere
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const menuButton = document.getElementById("menu-button");
+      const mobileNav = document.getElementById("mobile-nav");
+      const iconHamburger = document.getElementById("icon-hamburger");
+      const iconClose = document.getElementById("icon-close");
+
+      menuButton.addEventListener("click", () => {
+        mobileNav.classList.toggle("hidden");
+        iconHamburger.classList.toggle("hidden");
+        iconClose.classList.toggle("hidden");
+      });
+
+      // Close menu when link is clicked
+      const navLinks = document.querySelectorAll("#mobile-nav a");
+      navLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileNav.classList.add("hidden");
+          iconHamburger.classList.remove("hidden");
+          iconClose.classList.add("hidden");
+        });
+      });
+    </script>
+
+    <script src="index.js"></script>
+  </body>
+</html>

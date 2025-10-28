@@ -12,63 +12,54 @@
       }
     </style>
   </head>
-  <body>
+
+  <body class="min-h-screen flex flex-col bg-gray-100">
+    <!-- Header -->
     <header
-      class="w-full fixed top-0 z-50 text-gray-600 body-font bg-indigo-300"
+      class="w-full fixed top-0 z-50 text-gray-700 body-font bg-indigo-300 shadow-md"
     >
-      <div
-        class="container sm:max-w-full md:max-w-full flex items-center justify-between p-2"
-      >
+      <div class="container mx-auto flex items-center justify-between p-3">
         <!-- Logo -->
         <a
-          class="flex title-font font-medium items-center text-gray-900"
           href="index.html"
+          class="flex items-center font-bold text-2xl text-gray-900"
         >
-          <span
-            class="brandName hover:cursor-pointer md:text-lg lg:text-2xl ml-2 text-nowrap"
-            >Football Buzz</span
-          >
+          ⚽ Football Buzz
         </a>
 
         <!-- Search (Desktop) -->
-        <div class="hidden md:flex items-center justify-center w-1/3">
-          <form class="searchForm w-full flex gap-2">
+        <div class="hidden md:flex items-center w-1/3">
+          <form class="w-full flex gap-2 searchForm">
             <input
               id="searchInput"
               type="text"
               placeholder="Search..."
-              class="md:text-lg w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+              class="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
             <button
-              class="md:text-md lg:text-lg bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              class="bg-indigo-600 text-white px-5 py-2 rounded-full hover:bg-indigo-700 transition"
             >
               Search
             </button>
           </form>
         </div>
 
-        <!-- Nav Links (Desktop only) -->
-        <nav
-          id="nav-menu"
-          class="hidden md:flex md:flex-row md:space-x-6 md:items-center"
-        >
-          <a class="ballonDorBtn py-2 hover:text-gray-900 cursor-pointer"
-            >Ballon d'Or</a
-          >
-          <a class="py-2 hover:text-gray-900 cursor-pointer">Players</a>
-          <a class="py-2 hover:text-gray-900 cursor-pointer">Matches</a>
-          <a class="py-2 hover:text-gray-900 cursor-pointer">Community</a>
+        <!-- Nav Links (Desktop) -->
+        <nav class="hidden md:flex items-center space-x-6">
+          <a href="index.html">Home</a>
+          <a href="features.html">Features</a>
+          <a href="about.html">About</a>
+          <!-- <a href="#" class="hover:text-gray-900 ballonDorBtn">Ballon d'Or</a>
+          <a href="#" class="hover:text-gray-900 bestPlayers">Best Players</a> -->
+          <!-- <a href="#" class="hover:text-gray-900">Matches</a>
+          <a href="#" class="hover:text-gray-900">Community</a> -->
         </nav>
 
-        <!-- Hamburger (Mobile only) -->
-        <button
-          id="menu-button"
-          class="md:hidden text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          <!-- Hamburger Icon -->
+        <!-- Hamburger (Mobile) -->
+        <button id="menu-button" class="md:hidden focus:outline-none">
           <svg
             id="icon-hamburger"
-            class="w-8 h-8"
+            class="w-7 h-7"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -78,12 +69,11 @@
               stroke-linejoin="round"
               stroke-width="2"
               d="M4 6h16M4 12h16M4 18h16"
-            ></path>
+            />
           </svg>
-          <!-- Close Icon -->
           <svg
             id="icon-close"
-            class="w-8 h-8 hidden"
+            class="w-7 h-7 hidden"
             fill="none"
             stroke="currentColor"
             viewBox="0 0 24 24"
@@ -93,98 +83,252 @@
               stroke-linejoin="round"
               stroke-width="2"
               d="M6 18L18 6M6 6l12 12"
-            ></path>
+            />
           </svg>
         </button>
       </div>
 
-      <!-- Nav for Mobile -->
+      <!-- Mobile Nav -->
       <nav
         id="mobile-nav"
-        class="hidden flex flex-col items-end space-y-2 px-4 pb-4 md:hidden"
+        class="hidden flex flex-col bg-indigo-200 p-4 space-y-2 text-right"
       >
-        <a class="py-2 hover:text-gray-900 cursor-pointer">Discover</a>
-        <a class="py-2 hover:text-gray-900 cursor-pointer">Players</a>
-        <a class="py-2 hover:text-gray-900 cursor-pointer">Matches</a>
-        <a class="py-2 hover:text-gray-900 cursor-pointer">Community</a>
+        <a href="index.html">Home</a>
+        <a href="features.html">Features</a>
+        <a href="about.html">About</a>
+        <!-- <a href="#" class="hover:text-gray-900 ballonDorBtn">Ballon d'Or</a>
+        <a href="#" class="hover:text-gray-900 bestPlayers">Best Players</a> -->
+        <!-- <a href="#" class="hover:text-gray-900">Matches</a> -->
+        <!-- <a href="#" class="hover:text-gray-900">Community</a> -->
       </nav>
     </header>
 
-    <div class="container mx-auto p-4 mt-20">
-      <div class="filterOpt p-4">
-        <div class="flex justify-start gap-4">
-          <select id="filterPosition" class="bg-zinc-200 p-2 border rounded">
-            <option value="All">All Positions</option>
-            <option value="Goalkeeper">Goalkeeper</option>
-            <option value="Defender">Defender</option>
-            <option value="Midfielder">Midfielder</option>
-            <option value="Forward">Forward</option>
-          </select>
+    <!-- Main Content -->
+    <main
+      class="flex-1 flex flex-wrap justify-center items-center gap-6 p-6 container mx-auto mt-20 p-6"
+    >
+      <div id="homepage">
+        <div class="leagueTable">
+          <h1 class="text-4xl font-bold text-center text-indigo-600 mb-10">
+            POINT TABLE
+          </h1>
 
-          <select
-            id="sortOption"
-            class="bg-zinc-200 text-center p-2 border rounded"
-          >
-            <option value="none">Sort By</option>
-            <option value="ageAsc">Age: Low to High</option>
-            <option value="ageDesc">Age: High to Low</option>
-            <option value="jerseyAsc">Jersey: Low to High</option>
-            <option value="jerseyDesc">Jersey: High to Low</option>
-          </select>
+          <!-- League Cards -->
+          <div class="flex flex-wrap justify-center gap-8" id="leagues">
+            <!-- Premier League -->
+            <div
+              class="bg-white rounded-2xl shadow-xl p-6 w-64 hover:scale-105 transition transform cursor-pointer"
+              id="4328"
+            >
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQEPBjXm5XyTS4Xh-EAI4M7MUEfMv9yjElrow&s"
+                alt="Premier League"
+                class="w-20 h-20 object-contain mx-auto"
+                id="4328"
+              />
+              <h2
+                class="text-xl font-bold text-center text-gray-800 mt-4"
+                id="4328"
+              >
+                Premier League
+              </h2>
+              <p id="4328" class="text-sm text-center text-gray-500">England</p>
+            </div>
 
+            <!-- LaLiga -->
+            <div
+              class="bg-white rounded-2xl shadow-xl p-6 w-64 hover:scale-105 transition transform cursor-pointer"
+              id="4335"
+            >
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUGbQamPAx5pFfixle596BNKgC--U5GbodfQ&s "
+                alt="LaLiga"
+                class="w-20 h-20 object-contain mx-auto"
+                id="4335"
+              />
+              <h2
+                class="text-xl font-bold text-center text-gray-800 mt-4"
+                id="4335"
+              >
+                LaLiga
+              </h2>
+              <p id="4335" class="text-sm text-center text-gray-500">Spain</p>
+            </div>
+
+            <!-- Ligue 1 -->
+            <div
+              class="bg-white rounded-2xl shadow-xl p-6 w-64 hover:scale-105 transition transform cursor-pointer"
+              id="4334"
+            >
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFpoBXZhduU2d4jzZ-UmL2Aeqbd__K0Pmlkg&s"
+                alt="Ligue 1"
+                class="w-20 h-20 object-contain mx-auto"
+                id="4334"
+              />
+              <h2
+                class="text-xl font-bold text-center text-gray-800 mt-4"
+                id="4334"
+              >
+                Ligue 1
+              </h2>
+              <p id="4334" class="text-sm text-center text-gray-500">France</p>
+            </div>
+
+            <!-- Serie A -->
+            <div
+              class="bg-white rounded-2xl shadow-xl p-6 w-64 hover:scale-105 transition transform cursor-pointer"
+              id="4332"
+            >
+              <img
+                src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa4X4Oa75oDFLlBG-SWbuHOEpXDsXgYfH-XA&s"
+                alt="Serie A"
+                id="4332"
+                class="w-20 h-20 object-contain mx-auto"
+              />
+              <h2
+                class="text-xl font-bold text-center text-gray-800 mt-4"
+                id="4332"
+              >
+                Serie A
+              </h2>
+              <p id="4332" class="text-sm text-center text-gray-500">Italy</p>
+            </div>
+
+            <!-- Bundesliga -->
+            <div
+              class="bg-white rounded-2xl shadow-xl p-6 w-64 hover:scale-105 transition transform cursor-pointer"
+              id="4331"
+            >
+              <img
+                src="https://logoeps.com/wp-content/uploads/2012/04/bundesliga-logo.png"
+                alt="Bundesliga"
+                id="4331"
+                class="w-20 h-20 object-contain mx-auto"
+              />
+              <h2
+                class="text-xl font-bold text-center text-gray-800 mt-4"
+                id="4331"
+              >
+                Bundesliga
+              </h2>
+              <p id="4331" class="text-sm text-center text-gray-500">Germany</p>
+            </div>
+          </div>
+        </div>
+        <section class="mt-20 container mx-auto px-6">
+          <h1 class="text-4xl font-bold text-center text-indigo-600 mb-10">
+            SHOWCASE
+          </h1>
+
+          <div class="flex flex-wrap justify-center gap-8">
+            <!-- Ballon d'Or Card -->
+            <div
+              class="bg-white rounded-2xl shadow-xl p-6 w-64 hover:scale-105 transition transform cursor-pointer text-center ballonDorBtn"
+            >
+              <img
+                src="https://www.topendsports.com/sport/soccer/images/ballondor-trophy.jpg"
+                alt="Ballon d'Or"
+                class="w-20 h-20 object-contain mx-auto"
+              />
+              <h2 class="text-xl font-bold text-gray-800 mt-4">Ballon d'Or</h2>
+              <p class="text-sm text-gray-500">Best Footballer of the Year</p>
+            </div>
+
+            <!-- Best Players Card -->
+            <div
+              class="bg-white rounded-2xl shadow-xl p-6 w-64 hover:scale-105 transition transform cursor-pointer text-center bestPlayers"
+            >
+              <img
+                src="https://thumbs.dreamstime.com/b/vector-football-soccer-player-silhouette-23350196.jpg"
+                alt="Best Players"
+                class="w-20 h-20 object-contain mx-auto"
+              />
+              <h2 class="text-xl font-bold text-gray-800 mt-4">Best Players</h2>
+              <p class="text-sm text-gray-500">Top Performers Worldwide</p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="dynamicContent hidden">
+        <div class="filterOpt p-4">
+          <div class="flex justify-start gap-4">
+            <select id="filterPosition" class="bg-zinc-200 p-2 border rounded">
+              <option value="All">All Positions</option>
+              <option value="Goalkeeper">Goalkeeper</option>
+              <option value="Defender">Defender</option>
+              <option value="Midfielder">Midfielder</option>
+              <option value="Forward">Forward</option>
+            </select>
+
+            <select
+              id="sortOption"
+              class="bg-zinc-200 text-center p-2 border rounded"
+            >
+              <option value="none">Sort By</option>
+              <option value="ageAsc">Age: Low to High</option>
+              <option value="ageDesc">Age: High to Low</option>
+              <option value="jerseyAsc">Jersey: Low to High</option>
+              <option value="jerseyDesc">Jersey: High to Low</option>
+            </select>
+
+            <button
+              class="text-white bg-indigo-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+              id="filterBtn"
+            >
+              Apply
+            </button>
+          </div>
+        </div>
+
+        <div class="container mx-auto p-4" id="container"></div>
+      </div>
+
+      <div id="tableContainer" class="mt-6 hidden"></div>
+
+      <!-- Modal -->
+      <div
+        id="playerModal"
+        class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50"
+      >
+        <div
+          class="bg-white rounded-xl w-[90%] max-w-2xl p-6 relative shadow-lg max-h-[90vh] overflow-y-auto"
+        >
           <button
-            class="text-white bg-indigo-500 border-0 py-2 px-4 focus:outline-none hover:bg-indigo-600 rounded text-lg"
-            id="filterBtn"
+            id="closeModal"
+            class="absolute top-2 right-2 text-xl font-bold text-gray-500 hover:text-black"
           >
-            Apply
+            &times;
           </button>
+          <div id="modalContent"></div>
         </div>
       </div>
-      <div class="container mx-auto p-4" id="container"></div>
-    </div>
-
-    <!-- Modal -->
-    <div
-      id="playerModal"
-      class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50"
-    >
-      <div
-        class="bg-white rounded-xl w-[90%] max-w-2xl p-6 relative shadow-lg max-h-[90vh] overflow-y-auto"
-      >
-        <button
-          id="closeModal"
-          class="absolute top-2 right-2 text-xl font-bold text-gray-500 hover:text-black"
-        >
-          &times;
-        </button>
-        <div id="modalContent"></div>
-      </div>
-    </div>
+    </main>
 
     <!-- Footer -->
-    <footer class="bg-red-600 text-white mt-10">
-      <div class="container mx-auto px-6 py-8">
-        <div
-          class="flex flex-col md:flex-row justify-between items-start gap-6"
-        >
-          <div class="w-full md:w-1/3">
+    <footer class="bg-indigo-700 text-white mt-16">
+      <div class="container mx-auto px-6 py-10">
+        <div class="flex flex-col md:flex-row justify-between gap-8">
+          <div class="md:w-1/3">
             <p>
               Stay on top of the game with Football Buzz — your go-to source for
               all things football. Discover live scores, match highlights,
-              player stats, team news, and expert analysis. Your ultimate
-              destination for football fans everywhere.
+              player stats, team news, and expert analysis.
             </p>
             <p class="mt-4">
               Powered by
-              <a href="#" class="text-teal-300 underline hover:text-teal-400"
+              <a
+                href="#"
+                class="text-yellow-300 underline hover:text-yellow-400"
                 >thesportsdb</a
               >
             </p>
           </div>
 
-          <div class="w-full md:w-2/3 flex justify-evenly">
+          <div class="flex justify-evenly md:w-2/3 text-sm">
             <div>
-              <h4 class="font-bold mb-2">Product</h4>
+              <h4 class="font-bold mb-2 text-lg">Product</h4>
               <ul class="space-y-1">
                 <li>Home</li>
                 <li>Popular Player</li>
@@ -193,7 +337,7 @@
               </ul>
             </div>
             <div>
-              <h4 class="font-bold mb-2">Company</h4>
+              <h4 class="font-bold mb-2 text-lg">Company</h4>
               <ul class="space-y-1">
                 <li>About</li>
                 <li>Privacy Policy</li>
@@ -202,7 +346,7 @@
               </ul>
             </div>
             <div>
-              <h4 class="font-bold mb-2">Resources</h4>
+              <h4 class="font-bold mb-2 text-lg">Resources</h4>
               <ul class="space-y-1">
                 <li>API Documentation</li>
                 <li>Help Center</li>
@@ -212,21 +356,25 @@
             </div>
           </div>
         </div>
+
         <hr class="my-6 border-white/30" />
-        <div class="flex flex-col md:flex-row justify-between items-center">
+        <div
+          class="flex flex-col md:flex-row justify-between items-center text-sm"
+        >
           <p>&copy; 2025 Football Buzz. All rights reserved.</p>
-          <div class="flex gap-4 text-xl">
+          <div class="flex gap-4 text-lg">
             <i class="fa-brands fa-github"></i>
             <i class="fa-brands fa-twitter"></i>
             <i class="fa-solid fa-envelope"></i>
           </div>
         </div>
-        <div class="text-center mt-4">
-          Made with ❤️ for Football lovers everywhere
-        </div>
+        <p class="text-center mt-4 text-sm">
+          Made with ❤️ for football lovers everywhere
+        </p>
       </div>
     </footer>
 
+    <!-- JS for Mobile Menu -->
     <script>
       const menuButton = document.getElementById("menu-button");
       const mobileNav = document.getElementById("mobile-nav");
@@ -239,9 +387,7 @@
         iconClose.classList.toggle("hidden");
       });
 
-      // Close menu when link is clicked
-      const navLinks = document.querySelectorAll("#mobile-nav a");
-      navLinks.forEach((link) => {
+      document.querySelectorAll("#mobile-nav a").forEach((link) => {
         link.addEventListener("click", () => {
           mobileNav.classList.add("hidden");
           iconHamburger.classList.remove("hidden");
@@ -249,7 +395,6 @@
         });
       });
     </script>
-
     <script src="index.js"></script>
   </body>
 </html>

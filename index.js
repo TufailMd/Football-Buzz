@@ -266,7 +266,7 @@ function createPlayerCard(player) {
     ? new Date().getFullYear() - parseInt(dateBorn.split("-")[0])
     : "N/A";
   const card = document.createElement("div");
-  card.className = `w-full bg-white rounded-xl shadow-lg border border-gray-200 
+  card.className = `w-full bg-gray-50 rounded-xl shadow-lg border border-gray-200 
     hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 overflow-hidden cursor-pointer hover:scale-105 transition-transform duration-300`;
 
   card.innerHTML = `
@@ -420,44 +420,63 @@ searchForm.addEventListener("submit", async (e) => {
 });
 
 function showModal(player) {
-  const modal = document.getElementById("playerModal");
+  const modalOverlay = document.getElementById("playerModalOverlay");
   const modalContent = document.getElementById("modalContent");
 
   modalContent.innerHTML = `
-    <div class="flex flex-col md:flex-row gap-6">
-      <div class="flex-shrink-0 w-full md:w-1/2">
-        <img src="${
+  <div class="flex flex-col md:flex-row md:flex-wrap gap-6">
+    <!-- Player Image -->
+    <div class="flex-shrink-0 w-full md:w-1/2">
+      <img
+        src="${
           player.strCutout ||
           player.strThumb ||
           "https://via.placeholder.com/300x200?text=No+Image"
         }"
-             alt="${player.strPlayer}"
-             class="w-full h-auto rounded-lg shadow-md"/>
-      </div>
-      <div class="flex-1 space-y-2">
-        <h2 class="text-2xl font-bold text-indigo-600">${player.strPlayer}</h2>
-        <p><strong>Nationality:</strong> ${player.strNationality || "N/A"}</p>
-        <p><strong>Position:</strong> ${player.strPosition || "N/A"}</p>
-        <p><strong>Team:</strong> ${player.strTeam || "N/A"}</p>
-        <p><strong>Birth Date:</strong> ${player.dateBorn || "N/A"}</p>
-        <p><strong>Description:</strong> ${
-          player.strDescriptionEN
-            ? player.strDescriptionEN.slice(0, 300) + "..."
-            : "No bio available."
-        }</p>
-      </div>
+        alt="${player.strPlayer}"
+        class="w-full h-auto rounded-lg shadow-md"
+      />
     </div>
-  `;
 
-  modal.classList.remove("hidden");
+    <!-- Player Info -->
+    <div class="flex-1 space-y-2 w-full md:w-1/2">
+      <h2 class="text-2xl font-bold text-indigo-600">${player.strPlayer}</h2>
+      <p><strong>Nationality:</strong> ${player.strNationality || "N/A"}</p>
+      <p><strong>Team:</strong> ${player.strTeam || "N/A"}</p>
+      <p><strong>Position:</strong> ${player.strPosition || "N/A"}</p>
+      <p><strong>Jersey No:</strong> ${player.strNumber || "N/A"}</p>
+      <p><strong>Date of Birth:</strong> ${player.dateBorn || "N/A"}</p>
+      <p><strong>Height:</strong> ${player.strHeight || "N/A"}</p>
+      <p><strong>Weight:</strong> ${player.strWeight || "N/A"}</p>
+    </div>
 
-  document.getElementById("closeModal").addEventListener("click", () => {
-    modal.classList.add("hidden");
-  });
+    <!-- Full Description below both columns -->
+    <div class="w-full mt-4">
+      <p><strong>Description:</strong> ${
+        player.strDescriptionEN
+          ? player.strDescriptionEN
+          : "No description available."
+      }</p>
+    </div>
+  </div>
+`;
+
+  modalOverlay.classList.remove("hidden");
 }
 
+// Close modal logic
 document.getElementById("closeModal").addEventListener("click", () => {
-  document.getElementById("playerModal").classList.add("hidden");
+  document.getElementById("playerModalOverlay").classList.add("hidden");
+});
+// document.getElementById("closeModal").addEventListener("click", () => {
+//   document.getElementById("playerModal").classList.add("hidden");
+// });
+
+// Close when clicking outside
+document.getElementById("playerModalOverlay").addEventListener("click", (e) => {
+  if (e.target.id === "playerModalOverlay") {
+    document.getElementById("playerModalOverlay").classList.add("hidden");
+  }
 });
 
 // ✨ FILTER + SORT
